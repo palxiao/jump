@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>reject</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        font-size: 20px;
+      }
+      .timer {
+        font-weight: bold;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <p>域名备案中，依工信部要求暂时无法访问</p>
+      <a id="new-url"></a>
+      <p>In <span class="timer">4</span> 秒后跳转临时地址...</p>
+    </div>
+
+    <script>
+      let timer = 4; // 计时器秒数
+      const newDomain = 'design.palxp.cn'
+      const domain = document.domain;
+      const href = window.location.href
+      const redirectUrl = href.replace(domain, newDomain)
+      // 显示将要跳转的 URL
+      // document.getElementById('new-url').textContent = redirectUrl;
+      document.getElementById('new-url').textContent = redirectUrl
+      document.getElementById('new-url').href = redirectUrl
+
+      // 倒计时并跳转到新的 URL
+      const countdown = setInterval(() => {
+        timer--;
+        document.querySelector('.timer').textContent = timer;
+
+        if (timer <= 0) {
+          clearInterval(countdown);
+          window.location.href = redirectUrl;
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
